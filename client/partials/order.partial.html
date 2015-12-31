@@ -1,0 +1,48 @@
+<div>
+	<h4><a href='#/'>Customers</a> | Orders</h4>
+	<div class="container">
+		<h2>Add a new order</h2>
+
+		<p>Customer: 
+			<select ng-model='newOrder.name'>
+				<option ng-repeat='customer in OrderCtrl.customers | orderBy: customer.name'>{{customer.name}}</option>
+			</select>
+		</p>
+		<p>Quantity: 
+			<select ng-model='newOrder.quantity'>
+				<option>1</option>
+				<option>2</option>
+				<option>3</option>
+				<option>4</option>
+				<option>5</option>
+			</select>
+			<select ng-model='newOrder.product'>
+				<option>Nike Shoes</option>
+				<option>Black Belts</option>
+				<option>Ice Cream</option>
+				<option>Candy</option>
+			</select>
+		</p>
+		<button class='btn btn-primary' ng-click='OrderCtrl.addOrder(newOrder)'>Order</button>
+
+		<table class='table table-striped'>
+			<input id='searchBar' type='text' ng-model='filter_name' placeholder='Filter orders by...' />
+				<thead>
+					<tr>
+						<th class='col col-lg-3'>Customer Name</th>
+						<th class='col col-lg-3'>Product</th>
+						<th class='col col-lg-3'>Quantity</th>
+						<th class='col col-lg-3'>Date</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat='order in OrderCtrl.orders | filter:filter_name | orderBy: "order.created" : reverse'>
+						<td>{{ order.name }}</td>
+						<td>{{ order.product }}</td>
+						<td>{{ order.quantity }}</td>
+						<td>{{ order.createdAt | date: 'MMMM d, yyyy' }}</td>
+					</tr>
+				</tbody>
+			</table>
+	</div>
+</div>
